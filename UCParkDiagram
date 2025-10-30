@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" version="28.2.8">
   <diagram name="Page-1" id="5f0bae14-7c28-e335-631c-24af17079c00">
-    <mxGraphModel dx="759" dy="666" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+    <mxGraphModel dx="938" dy="822" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -215,19 +215,22 @@
           <mxGeometry y="54" width="360" height="25" as="geometry" />
         </mxCell>
         <mxCell id="u7pdtUxZaAKKbWrR2P3L-56" value="ICarUserManagement" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=29;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="92" y="990" width="360" height="129" as="geometry" />
+          <mxGeometry x="92" y="980" width="360" height="154" as="geometry" />
         </mxCell>
         <mxCell id="u7pdtUxZaAKKbWrR2P3L-57" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+registerVehicle(user:User, vehicle:Vehicle): Boolean&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="u7pdtUxZaAKKbWrR2P3L-56" vertex="1">
           <mxGeometry y="29" width="360" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="cXRSVdl2FA28SgxSp88q-4" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+newParking(vehicle:Vehicle): Boolean&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="u7pdtUxZaAKKbWrR2P3L-56">
+        <mxCell id="cXRSVdl2FA28SgxSp88q-14" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+deleteVehicle(user:User, vehicle:Vehicle): Boolean&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="u7pdtUxZaAKKbWrR2P3L-56">
           <mxGeometry y="54" width="360" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="u7pdtUxZaAKKbWrR2P3L-58" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+getParkingInformations(vehicle:Vehicle): Parking[*]&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="u7pdtUxZaAKKbWrR2P3L-56" vertex="1">
+        <mxCell id="cXRSVdl2FA28SgxSp88q-4" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+newParking(vehicle:Vehicle): Boolean&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="u7pdtUxZaAKKbWrR2P3L-56">
           <mxGeometry y="79" width="360" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="cXRSVdl2FA28SgxSp88q-5" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+increaseParkingTime(vehicle:Vehicle): Parking&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="u7pdtUxZaAKKbWrR2P3L-56">
+        <mxCell id="u7pdtUxZaAKKbWrR2P3L-58" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+getParkingInformations(vehicle:Vehicle): Parking[*]&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="u7pdtUxZaAKKbWrR2P3L-56" vertex="1">
           <mxGeometry y="104" width="360" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cXRSVdl2FA28SgxSp88q-5" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+increaseParkingTime(vehicle:Vehicle): Parking&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="u7pdtUxZaAKKbWrR2P3L-56">
+          <mxGeometry y="129" width="360" height="25" as="geometry" />
         </mxCell>
         <mxCell id="u7pdtUxZaAKKbWrR2P3L-60" value="ITimer" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=29;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="92" y="1149" width="360" height="54" as="geometry" />
