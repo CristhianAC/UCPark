@@ -42,12 +42,12 @@ public interface ICarUserManagement {
     public Parking getParkingInformations(User user);
 
     /**
-     * Increases parking information for a vehicle.
+     * Increases parking time for a vehicle.
      *
      * @param vehicle
      * @param minutes
      * @return
      */
-    public Parking increaseParkingInformation(Vehicle vehicle, int minutes);
+    public Parking increaseParkingTime(Vehicle vehicle, int minutes);
 
 }
