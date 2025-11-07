@@ -61,25 +61,28 @@
           <mxGeometry y="154" width="360" height="25" as="geometry" />
         </mxCell>
         <mxCell id="lbF5XyulHhnLQbkVagX7-45" value="IVehicleDAO" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=29;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="611" y="873" width="360" height="179" as="geometry" />
+          <mxGeometry x="611" y="873" width="380" height="204" as="geometry" />
         </mxCell>
         <mxCell id="lbF5XyulHhnLQbkVagX7-46" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+createVehicle(user:User, vehicle: Vehicle): Vehicle&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="lbF5XyulHhnLQbkVagX7-45" vertex="1">
-          <mxGeometry y="29" width="360" height="25" as="geometry" />
+          <mxGeometry y="29" width="380" height="25" as="geometry" />
         </mxCell>
         <mxCell id="cXRSVdl2FA28SgxSp88q-3" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+updateVehicle(user:User, vehicle: Vehicle): Vehicle&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="lbF5XyulHhnLQbkVagX7-45" vertex="1">
-          <mxGeometry y="54" width="360" height="25" as="geometry" />
+          <mxGeometry y="54" width="380" height="25" as="geometry" />
         </mxCell>
         <mxCell id="cXRSVdl2FA28SgxSp88q-2" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+deleteVehicle(user:User, vehicle: Vehicle): Vehicle&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="lbF5XyulHhnLQbkVagX7-45" vertex="1">
-          <mxGeometry y="79" width="360" height="25" as="geometry" />
+          <mxGeometry y="79" width="380" height="25" as="geometry" />
         </mxCell>
         <mxCell id="cXRSVdl2FA28SgxSp88q-6" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+getVehicles(): Vehicle[*]&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="lbF5XyulHhnLQbkVagX7-45" vertex="1">
-          <mxGeometry y="104" width="360" height="25" as="geometry" />
+          <mxGeometry y="104" width="380" height="25" as="geometry" />
         </mxCell>
         <mxCell id="0khf0YZJOwo2pVBIDSL7-1" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+getVehicleByOwner(user:User): Vehicle[*]&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="lbF5XyulHhnLQbkVagX7-45">
-          <mxGeometry y="129" width="360" height="25" as="geometry" />
+          <mxGeometry y="129" width="380" height="25" as="geometry" />
         </mxCell>
         <mxCell id="cXRSVdl2FA28SgxSp88q-16" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+getVehicleByPlate(plate:String): Vehicle&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="lbF5XyulHhnLQbkVagX7-45" vertex="1">
-          <mxGeometry y="154" width="360" height="25" as="geometry" />
+          <mxGeometry y="154" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="0khf0YZJOwo2pVBIDSL7-3" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+createComplaint(plate:String, complaint: Complaint): Vehicle&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="lbF5XyulHhnLQbkVagX7-45">
+          <mxGeometry y="179" width="380" height="25" as="geometry" />
         </mxCell>
         <mxCell id="u7pdtUxZaAKKbWrR2P3L-1" value="&lt;div&gt;User&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Management&lt;/span&gt;&lt;/div&gt;" style="shape=module;align=left;spacingLeft=20;align=center;verticalAlign=top;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="441" y="245.5" width="231" height="39" as="geometry" />
@@ -208,7 +211,7 @@
         <mxCell id="u7pdtUxZaAKKbWrR2P3L-46" value="&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+checkParking(plateNumber: String): Boolean&lt;/span&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="u7pdtUxZaAKKbWrR2P3L-45" vertex="1">
           <mxGeometry y="29" width="360" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="u7pdtUxZaAKKbWrR2P3L-47" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+report(plateNumber:String): Boolean&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="u7pdtUxZaAKKbWrR2P3L-45" vertex="1">
+        <mxCell id="u7pdtUxZaAKKbWrR2P3L-47" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;+report(plateNumber:String, complaint:Complaint): Boolean&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" parent="u7pdtUxZaAKKbWrR2P3L-45" vertex="1">
           <mxGeometry y="54" width="360" height="25" as="geometry" />
         </mxCell>
         <mxCell id="u7pdtUxZaAKKbWrR2P3L-53" value="IUserManagement" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=29;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" parent="1" vertex="1">
