@@ -6,10 +6,11 @@ import es.unican.ps.dao.IVehicleDao;
 import es.unican.ps.entities.Complaint;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-
+@Stateless
 public class VehicleDao implements IVehicleDao {
 
     @PersistenceContext(unitName = "ucPark")
@@ -20,16 +21,7 @@ public class VehicleDao implements IVehicleDao {
         if (em.find(Vehicle.class, vehicle.getPlate()) != null) {
             return null; // Vehicle already exists
         }
-        // Assuming relationship is managed via User or Vehicle directly?
-        // The diagram shows User has vehicles.
-        // But Vehicle entity has no explicit owner field in my previous update, wait.
-        // I should have added an owner field to Vehicle if I want to query by owner easily or map it.
-        // Let's check Vehicle entity again. I added @OneToMany in Vehicle? No, I added @OneToMany in User?
-        // Wait, I need to check the relationship.
-        // Diagram: User 1 -- * Vehicle.
-        // In Vehicle.java I didn't add the owner field in the previous step, I missed it.
-        // I need to add 'private User owner' to Vehicle to map the relationship properly or use a join table.
-        // For now, I will persist the vehicle.
+        vehicle.setOwner(user);
         em.persist(vehicle);
         return vehicle;
     }

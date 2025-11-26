@@ -4,10 +4,11 @@ import java.util.List;
 
 import es.unican.ps.dao.IUserDao;
 import es.unican.ps.entities.User;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-
+@Stateless
 public class UserDao implements IUserDao {
 
     @PersistenceContext(unitName = "ucPark")
@@ -37,6 +38,7 @@ public class UserDao implements IUserDao {
     public User createUser(String email, String password) {
         String id = String.valueOf(System.currentTimeMillis());
         User user = new User(id, email, password);
+        
         em.persist(user);
         return user;
     }
