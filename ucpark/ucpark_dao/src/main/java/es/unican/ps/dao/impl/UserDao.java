@@ -2,16 +2,15 @@ package es.unican.ps.dao.impl;
 
 import java.util.List;
 
+import es.unican.ps.dao.IUserDao;
+import es.unican.ps.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-import es.unican.ps.dao.IUserDao;
-import es.unican.ps.entities.User;
-
 public class UserDao implements IUserDao {
 
-    @PersistenceContext(unitName = "versionEspanholaPU")
+    @PersistenceContext(unitName = "ucPark")
     private EntityManager em;
 
     @Override

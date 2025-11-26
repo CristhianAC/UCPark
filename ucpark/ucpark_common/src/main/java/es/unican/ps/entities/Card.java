@@ -5,29 +5,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-
+@Getter
+@Setter
 @Entity
 public class Card {
 
-    @Getter
-    @Setter
+   
     @Id
     private String number;
 
-    @Getter
-    @Setter
+    
     private int cvv;
 
-    @Getter
-    @Setter
+    
     private String expiryDate;
 
-    @Getter
-    @Setter
+
     private String holder;
 
-    @Getter
-    @Setter
+   
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
     private User user;
 

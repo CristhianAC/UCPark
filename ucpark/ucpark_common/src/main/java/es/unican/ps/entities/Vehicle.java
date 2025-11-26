@@ -11,40 +11,33 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.CascadeType;
 import lombok.Getter;
 import lombok.Setter;
-
+@Getter
+@Setter
 @Entity
 public class Vehicle {
 
-    @Getter
-    @Setter
+   
     @Id
     private String plate;
 
-    @Getter
-    @Setter
+  
     private String brand;
 
-    @Getter
-    @Setter
+   
     private String model;
 
-    @Getter
-    @Setter
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
     private User owner;
 
-    @Getter
-    @Setter
+  
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = jakarta.persistence.FetchType.LAZY)
     private List<Complaint> complaints;
 
-    @Getter
-    @Setter
+   
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = jakarta.persistence.FetchType.LAZY)
     private List<Parking> history;
 
-    @Getter
-    @Setter
+   
     @OneToOne(cascade = CascadeType.ALL, fetch = jakarta.persistence.FetchType.LAZY)
     private Parking activeParking;
 
