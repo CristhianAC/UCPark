@@ -1,0 +1,22 @@
+networks:
+  app-network-public:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: db-mysql
+    networks:
+      - app-network-public
+    restart: always
+    env_file:
+      - ./mysql.env
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./shared:/usr/shared
