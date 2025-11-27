@@ -9,20 +9,14 @@ import es.unican.ps.entities.Complaint;
 import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
-
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+@Stateless
 public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer, IPay {
-
+    @Inject
     private IVehicleDao vehicleDao;
 
     public CarManagement() {
-    }
-
-    public CarManagement(IVehicleDao vehicleDao) {
-        this.vehicleDao = vehicleDao;
-    }
-
-    public void setVehicleDao(IVehicleDao vehicleDao) {
-        this.vehicleDao = vehicleDao;
     }
 
     @Override

@@ -48,11 +48,9 @@ public class VehicleDao implements IVehicleDao {
 
     @Override
     public List<Vehicle> getVehiclesByOwner(User user) {
-        // Since I don't have an owner field in Vehicle yet, I can't query easily.
-        // I should update Vehicle entity to have an owner field.
-        // But for now, I will return null or empty list to avoid compilation error, 
-        // and I will fix the Vehicle entity in the next step.
-        return null; 
+        TypedQuery<Vehicle> query = em.createQuery("SELECT v FROM Vehicle v WHERE v.owner = :user", Vehicle.class);
+        query.setParameter("user", user);
+        return query.getResultList();
     }
 
     @Override
