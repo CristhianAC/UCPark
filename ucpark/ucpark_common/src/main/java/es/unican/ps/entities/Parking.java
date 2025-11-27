@@ -29,7 +29,8 @@ public class Parking {
     @Getter
     @Setter
     private LocalDateTime startTime;
-
+    @Getter
+    @Setter
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
     private Vehicle vehicle;
 
