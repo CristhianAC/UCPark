@@ -1,5 +1,7 @@
 package es.unican.ps;
 
+import java.util.List;
+
 import es.unican.ps.business.ICarUserManagement;
 import es.unican.ps.business.IPay;
 import es.unican.ps.business.ITaxManagement;
@@ -9,11 +11,11 @@ import es.unican.ps.entities.Complaint;
 import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
 @Stateless
 public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer, IPay {
-    @Inject
+    @EJB
     private IVehicleDao vehicleDao;
 
     public CarManagement() {
@@ -129,6 +131,17 @@ public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer
         vehicleDao.updateVehicle(null, v);
         // payment/parking DAO we can only return that the vehicle exists.
         return v != null;
+    }
+
+    @Override
+    public List<Vehicle> getVehicles(User user) {
+        if (vehicleDao == null) {
+            throw new IllegalStateException("vehicleDao not set");
+        }
+        if (user == null) {
+            return null;
+        }
+        return vehicleDao.getVehiclesByOwner(user);
     }
 
 }

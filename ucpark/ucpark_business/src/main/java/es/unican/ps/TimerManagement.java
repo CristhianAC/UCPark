@@ -7,16 +7,17 @@ import es.unican.ps.business.ITimer;
 import es.unican.ps.dao.IVehicleDao;
 import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.Vehicle;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Schedule;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup; 
-import jakarta.inject.Inject; 
+
 
 @Singleton
 @Startup
 public class TimerManagement implements ITimer {
 
-    @Inject
+    @EJB
     private IVehicleDao vehicleDao;
 
     public TimerManagement() {

@@ -10,13 +10,13 @@ import es.unican.ps.entities.Card;
 import es.unican.ps.entities.Complaint;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
 @Stateless
 public class UserManagement implements IUserManagement, IUserAnomManagement {
-    @Inject
+    @EJB
     private IUserDao userDao;
-    @Inject
+    @EJB
     private IVehicleDao vehicleDao;
 
     public UserManagement() {

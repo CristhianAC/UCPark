@@ -1,5 +1,7 @@
 package es.unican.ps.business;
 
+import java.util.List;
+
 import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
@@ -49,5 +51,13 @@ public interface ICarUserManagement {
      * @return
      */
     public Parking increaseParkingTime(Vehicle vehicle, int minutes);
+
+    /**
+     * Retrieves the vehicles owned by a user.
+     *
+     * @param user The user whose vehicles are to be retrieved.
+     * @return A list of vehicles owned by the user.
+     */
+    public List<Vehicle> getVehicles(User user);
 
 }
