@@ -6,6 +6,10 @@ import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
 
+import es.unican.ps.entities.Vehicle;
+import jakarta.ejb.Local;
+
+@Local
 public interface ICarUserManagement {
 
     /**

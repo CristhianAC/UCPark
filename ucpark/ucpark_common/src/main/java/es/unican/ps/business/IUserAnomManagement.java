@@ -2,6 +2,10 @@ package es.unican.ps.business;
 
 import es.unican.ps.entities.User;
 
+import es.unican.ps.entities.User;
+import jakarta.ejb.Local;
+
+@Local
 public interface IUserAnomManagement {
 
     /**

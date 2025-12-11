@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-          <groupId>es.unican.ps</groupId>
-          <artifactId>ucpark</artifactId>
-          <version>1.0-SNAPSHOT</version>
+        <groupId>es.unican.ps</groupId>
+        <artifactId>ucpark</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>es.unican.ps</groupId>
@@ -22,6 +22,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.38</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.2.0</version>
         </dependency>
         <dependency>
             <groupId>jakarta.platform</groupId>
@@ -42,7 +47,7 @@
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
-		
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -68,6 +73,12 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>es.unican.ps</groupId>
+            <artifactId>ucpark_web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -79,19 +90,23 @@
                 <configuration>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
-                        <jarModule>
+                        <ejbModule>
                             <groupId>es.unican.ps</groupId>
                             <artifactId>ucpark_business</artifactId>
-                            <includeInApplicationXml>true</includeInApplicationXml>
-                        </jarModule>
-                        <jarModule>
+                        </ejbModule>
+                        <ejbModule>
                             <groupId>es.unican.ps</groupId>
                             <artifactId>ucpark_dao</artifactId>
-                        </jarModule>
+                        </ejbModule>
                         <jarModule>
                             <groupId>es.unican.ps</groupId>
                             <artifactId>ucpark_common</artifactId>
                         </jarModule>
+                        <webModule>
+                            <groupId>es.unican.ps</groupId>
+                            <artifactId>ucpark_web</artifactId>
+                            <contextRoot>/</contextRoot>
+                        </webModule>
                     </modules>
                 </configuration>
             </plugin>
