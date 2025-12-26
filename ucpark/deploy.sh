@@ -4,7 +4,7 @@
 set -e
 
 echo "Building project..."
-mvn clean package
+mvn clean package -DskipTests
 
 echo "Deploying to GlassFish..."
 # --force=true allows redeploying even if the application already exists

@@ -3,6 +3,7 @@ package es.unican.ps.entities;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -13,7 +14,7 @@ import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements Serializable {
 
     @Getter
     @Setter

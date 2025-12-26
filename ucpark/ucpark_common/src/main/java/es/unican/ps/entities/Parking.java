@@ -1,6 +1,7 @@
 package es.unican.ps.entities;
 
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-public class Parking {
+public class Parking implements Serializable {
     @Getter
     @Setter
     @Id

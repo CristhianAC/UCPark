@@ -3,6 +3,7 @@ package es.unican.ps.entities;
 
 import java.time.LocalDate;
 
+import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
@@ -14,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-public class Complaint {
+public class Complaint implements Serializable {
     @Getter
     @Setter
     @Id

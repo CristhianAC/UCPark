@@ -61,7 +61,7 @@ public class BusquedasBean implements Serializable {
             boolean success = carUserManagement.newParking(user, selectedVehicle);
             if (success) {
                 carUserManagement.increaseParkingTime(selectedVehicle, minutes);
-                return "success.xhtml?faces-redirect=true"; // Or wherever you want to go
+                return "success.xhtml?faces-redirect=true"; 
             }
         }
         return null;

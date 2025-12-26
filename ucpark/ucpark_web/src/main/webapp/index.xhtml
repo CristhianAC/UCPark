@@ -6,7 +6,7 @@
     <title>Search User</title>
 </h:head>
 <h:body>
-    <h:form>
+    <h:form id="searchForm">
         <h:outputLabel for="email" value="Email:" />
         <h:inputText id="email" value="#{busquedasBean.termino}" required="true" />
         <h:commandButton value="Search" action="#{busquedasBean.doSearchUser}" />

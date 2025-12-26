@@ -1,29 +1,26 @@
 package es.unican.ps.entities;
 
+import java.io.Serializable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
+
 @Getter
 @Setter
 @Entity
-public class Card {
+public class Card implements Serializable {
 
-   
     @Id
     private String number;
 
-    
     private int cvv;
 
-    
     private String expiryDate;
-
 
     private String holder;
 
-   
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
     private User user;
 
