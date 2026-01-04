@@ -84,7 +84,7 @@ public class VehicleDao implements IVehicleDao {
     }
 
     @Override
-    public List<Parking>    {
+    public List<Parking> getParkingsByVehicle(Vehicle vehicle) {
         TypedQuery<Parking> query = em.createQuery(
                 "SELECT p FROM Parking p WHERE p.vehicle = :vehicle ORDER BY p.startTime DESC", Parking.class);
         query.setParameter("vehicle", vehicle);
