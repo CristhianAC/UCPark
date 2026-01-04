@@ -3,6 +3,7 @@ package es.unican.ps.dao;
 import java.util.List;
 
 import es.unican.ps.entities.Complaint;
+import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
 
@@ -11,7 +12,7 @@ public interface IVehicleDao {
     /**
      * Creates a new vehicle for a user.
      *
-     * @param user just the owner
+     * @param user    just the owner
      * @param vehicle the vehicle to create
      * @return
      */
@@ -20,7 +21,7 @@ public interface IVehicleDao {
     /**
      * Deletes a vehicle for a user.
      *
-     * @param user just the owner
+     * @param user    just the owner
      * @param vehicle the vehicle to delete
      * @return
      */
@@ -37,7 +38,7 @@ public interface IVehicleDao {
     /**
      * Updates a vehicle for a user.
      *
-     * @param user just the owner
+     * @param user    just the owner
      * @param vehicle the vehicle to update
      * @return
      */
@@ -62,9 +63,33 @@ public interface IVehicleDao {
      * Creates a complaint for a vehicle identified by its plate number.
      *
      * @param plateNumber The plate number of the vehicle.
-     * @param complaint The complaint to be created.
+     * @param complaint   The complaint to be created.
      * @return The vehicle associated with the created complaint.
      */
     public Vehicle createComplaint(String plateNumber, Complaint complaint);
+
+    /**
+     * Creates a new parking record.
+     * 
+     * @param parking
+     * @return
+     */
+    public Parking createParking(Parking parking);
+
+    /**
+     * Updates an existing parking record.
+     * 
+     * @param parking
+     * @return
+     */
+    public Parking updateParking(Parking parking);
+
+    /**
+     * Gets all parking records for a vehicle.
+     * 
+     * @param vehicle
+     * @return
+     */
+    public List<Parking> getParkingsByVehicle(Vehicle vehicle);
 
 }

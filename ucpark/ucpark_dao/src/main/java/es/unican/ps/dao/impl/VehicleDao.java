@@ -4,12 +4,14 @@ import java.util.List;
 
 import es.unican.ps.dao.IVehicleDao;
 import es.unican.ps.entities.Complaint;
+import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
 import es.unican.ps.entities.Vehicle;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+
 @Stateless
 public class VehicleDao implements IVehicleDao {
 
@@ -68,6 +70,25 @@ public class VehicleDao implements IVehicleDao {
             return vehicle;
         }
         return null;
+    }
+
+    @Override
+    public Parking createParking(Parking parking) {
+        em.persist(parking);
+        return parking;
+    }
+
+    @Override
+    public Parking updateParking(Parking parking) {
+        return em.merge(parking);
+    }
+
+    @Override
+    public List<Parking>    {
+        TypedQuery<Parking> query = em.createQuery(
+                "SELECT p FROM Parking p WHERE p.vehicle = :vehicle ORDER BY p.startTime DESC", Parking.class);
+        query.setParameter("vehicle", vehicle);
+        return query.getResultList();
     }
 
 }

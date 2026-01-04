@@ -5,9 +5,8 @@ import java.util.List;
 import es.unican.ps.business.ICarUserManagement;
 import es.unican.ps.business.IPay;
 import es.unican.ps.business.ITaxManagement;
-import es.unican.ps.business.ITimer;
+
 import es.unican.ps.dao.IVehicleDao;
-import es.unican.ps.dao.IParkingDao;
 import es.unican.ps.entities.Complaint;
 import es.unican.ps.entities.Parking;
 import es.unican.ps.entities.User;
@@ -16,12 +15,9 @@ import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 
 @Stateless
-public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer, IPay {
+public class CarManagement implements ITaxManagement, ICarUserManagement, IPay {
     @EJB
     private IVehicleDao vehicleDao;
-
-    @EJB
-    private IParkingDao parkingDao;
 
     public CarManagement() {
     }
@@ -52,7 +48,7 @@ public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer
 
     @Override
     public boolean newParking(User user, Vehicle vehicle) {
-        if (vehicleDao == null || parkingDao == null) {
+        if (vehicleDao == null) {
             throw new IllegalStateException("DAOs not set");
         }
         if (user == null || vehicle == null) {
@@ -65,7 +61,7 @@ public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer
         parking.setMinutes(0);
         parking.setAmount(0.0);
 
-        return parkingDao.createParking(parking) != null;
+        return vehicleDao.createParking(parking) != null;
     }
 
     @Override
@@ -81,19 +77,19 @@ public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer
 
     @Override
     public Parking increaseParkingTime(Vehicle vehicle, int minutes) {
-        if (parkingDao == null) {
-            throw new IllegalStateException("parkingDao not set");
+        if (vehicleDao == null) {
+            throw new IllegalStateException("vehicleDao not set");
         }
         if (vehicle == null || minutes <= 0) {
             return null;
         }
 
-        List<Parking> parkings = parkingDao.getParkingsByVehicle(vehicle);
+        List<Parking> parkings = vehicleDao.getParkingsByVehicle(vehicle);
         if (parkings != null && !parkings.isEmpty()) {
             Parking current = parkings.get(0);
             current.setMinutes(current.getMinutes() + minutes);
             // Optional: Calculate amount logic here if needed
-            return parkingDao.updateParking(current);
+            return vehicleDao.updateParking(current);
         }
         return null;
     }
@@ -122,20 +118,6 @@ public class CarManagement implements ITaxManagement, ICarUserManagement, ITimer
 
         vehicleDao.createComplaint(plateNumber, complaint);
         // that the vehicle was found and thus can be reported.
-        return v != null;
-    }
-
-    @Override
-    public boolean endParking(String plateNumber) {
-        if (vehicleDao == null) {
-            throw new IllegalStateException("vehicleDao not set");
-        }
-        if (plateNumber == null || plateNumber.isEmpty()) {
-            return false;
-        }
-        Vehicle v = vehicleDao.getVehicleByPlate(plateNumber);
-        vehicleDao.updateVehicle(null, v);
-        // payment/parking DAO we can only return that the vehicle exists.
         return v != null;
     }
 
