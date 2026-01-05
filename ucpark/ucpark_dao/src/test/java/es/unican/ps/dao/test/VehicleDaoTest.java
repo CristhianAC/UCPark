@@ -3,13 +3,13 @@ package es.unican.ps.dao.test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -22,27 +22,26 @@ import jakarta.persistence.PersistenceException;
 /**
  * Unit tests for VehicleDao.createParking() method
  * Tests persistence logic and error handling
+ * 
+ * Uses @InjectMocks to automatically inject mocks into @PersistenceContext
+ * fields
  */
 @ExtendWith(MockitoExtension.class)
 public class VehicleDaoTest {
 
+    @InjectMocks
     private VehicleDao vehicleDao;
 
     @Mock
-    private EntityManager mockEntityManager;
+    private EntityManager em;
 
     private Parking testParking;
     private Vehicle testVehicle;
 
     @BeforeEach
-    public void setUp() throws Exception {
-        // Create instance of VehicleDao
-        vehicleDao = new VehicleDao();
-
-        // Inject mock EntityManager using reflection
-        Field emField = VehicleDao.class.getDeclaredField("em");
-        emField.setAccessible(true);
-        emField.set(vehicleDao, mockEntityManager);
+    public void setUp() {
+        // @InjectMocks automatically creates vehicleDao instance and injects em
+        // No need for manual reflection!
 
         // Create test data
         testVehicle = new Vehicle();
@@ -66,13 +65,13 @@ public class VehicleDaoTest {
     @Test
     public void testCreateParking_SuccessfulPersistence() {
         // Arrange
-        doNothing().when(mockEntityManager).persist(any(Parking.class));
+        doNothing().when(em).persist(any(Parking.class));
 
         // Act
         Parking result = vehicleDao.createParking(testParking);
 
         // Assert
-        verify(mockEntityManager, times(1)).persist(testParking);
+        verify(em, times(1)).persist(testParking);
         assertNotNull(result, "Method should return the parking object");
         assertEquals(testParking, result, "Should return the same parking object that was passed");
         assertEquals(testVehicle, result.getVehicle(), "Vehicle should be preserved");
@@ -87,14 +86,14 @@ public class VehicleDaoTest {
     public void testCreateParking_PersistenceException() {
         // Arrange
         doThrow(new PersistenceException("Constraint violation"))
-                .when(mockEntityManager).persist(any(Parking.class));
+                .when(em).persist(any(Parking.class));
 
         // Act & Assert
         assertThrows(PersistenceException.class, () -> {
             vehicleDao.createParking(testParking);
         }, "Should propagate PersistenceException when persist fails");
 
-        verify(mockEntityManager, times(1)).persist(testParking);
+        verify(em, times(1)).persist(testParking);
     }
 
     /**
@@ -107,7 +106,7 @@ public class VehicleDaoTest {
     public void testCreateParking_TransactionBehavior() {
         // Arrange
         doThrow(new PersistenceException("Transaction error"))
-                .when(mockEntityManager).persist(any(Parking.class));
+                .when(em).persist(any(Parking.class));
 
         // Act & Assert
         try {
@@ -119,7 +118,7 @@ public class VehicleDaoTest {
             assertEquals("Transaction error", e.getMessage());
         }
 
-        verify(mockEntityManager, times(1)).persist(testParking);
+        verify(em, times(1)).persist(testParking);
     }
 
     /**
@@ -138,14 +137,14 @@ public class VehicleDaoTest {
         // Mock EntityManager to throw exception for null vehicle
         // (This simulates database constraint violation)
         doThrow(new PersistenceException("Null vehicle not allowed"))
-                .when(mockEntityManager).persist(parkingWithNullVehicle);
+                .when(em).persist(parkingWithNullVehicle);
 
         // Act & Assert
         assertThrows(PersistenceException.class, () -> {
             vehicleDao.createParking(parkingWithNullVehicle);
         }, "Should throw exception when vehicle is null");
 
-        verify(mockEntityManager, times(1)).persist(parkingWithNullVehicle);
+        verify(em, times(1)).persist(parkingWithNullVehicle);
     }
 
     /**
@@ -171,13 +170,13 @@ public class VehicleDaoTest {
             // Simulate ID assignment by JPA/database
             parking.setId(123L);
             return null;
-        }).when(mockEntityManager).persist(any(Parking.class));
+        }).when(em).persist(any(Parking.class));
 
         // Act
         Parking result = vehicleDao.createParking(parkingWithoutId);
 
         // Assert
-        verify(mockEntityManager, times(1)).persist(parkingWithoutId);
+        verify(em, times(1)).persist(parkingWithoutId);
         assertNotNull(result.getId(), "ID should be set after persist");
         assertEquals(123L, result.getId(), "ID should be the generated value");
     }
@@ -188,20 +187,20 @@ public class VehicleDaoTest {
     @Test
     public void testCreateParking_CompleteObject() {
         // Arrange
-        Parking completePaking = new Parking();
-        completePaking.setVehicle(testVehicle);
-        completePaking.setStartTime(LocalDateTime.of(2026, 1, 5, 14, 30));
-        completePaking.setMinutes(120);
-        completePaking.setAmount(20.0);
+        Parking completeParking = new Parking();
+        completeParking.setVehicle(testVehicle);
+        completeParking.setStartTime(LocalDateTime.of(2026, 1, 5, 14, 30));
+        completeParking.setMinutes(120);
+        completeParking.setAmount(20.0);
 
         ArgumentCaptor<Parking> captor = ArgumentCaptor.forClass(Parking.class);
-        doNothing().when(mockEntityManager).persist(captor.capture());
+        doNothing().when(em).persist(captor.capture());
 
         // Act
-        Parking result = vehicleDao.createParking(completePaking);
+        Parking result = vehicleDao.createParking(completeParking);
 
         // Assert
-        verify(mockEntityManager, times(1)).persist(any(Parking.class));
+        verify(em, times(1)).persist(any(Parking.class));
 
         Parking capturedParking = captor.getValue();
         assertEquals(testVehicle, capturedParking.getVehicle());
@@ -209,6 +208,6 @@ public class VehicleDaoTest {
         assertEquals(20.0, capturedParking.getAmount(), 0.001);
         assertNotNull(capturedParking.getStartTime());
 
-        assertEquals(completePaking, result);
+        assertEquals(completeParking, result);
     }
 }

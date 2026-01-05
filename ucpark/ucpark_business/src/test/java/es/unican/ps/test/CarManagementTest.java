@@ -3,7 +3,6 @@ package es.unican.ps.test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -23,27 +23,26 @@ import es.unican.ps.entities.Vehicle;
 /**
  * Unit tests for CarManagement.newParking() method
  * Tests business logic: initialization of parking state before persistence
+ * 
+ * Uses @InjectMocks to automatically inject mocks into @EJB annotated fields
  */
 @ExtendWith(MockitoExtension.class)
 public class CarManagementTest {
 
+    @InjectMocks
     private CarManagement carManagement;
 
     @Mock
-    private IVehicleDao mockVehicleDao;
+    private IVehicleDao vehicleDao;
 
     private User testUser;
     private Vehicle testVehicle;
 
     @BeforeEach
-    public void setUp() throws Exception {
-        // Create instance of CarManagement
-        carManagement = new CarManagement();
-
-        // Inject mock DAO using reflection (since @EJB is not available in unit tests)
-        Field vehicleDaoField = CarManagement.class.getDeclaredField("vehicleDao");
-        vehicleDaoField.setAccessible(true);
-        vehicleDaoField.set(carManagement, mockVehicleDao);
+    public void setUp() {
+        // @InjectMocks automatically creates carManagement instance and injects
+        // vehicleDao
+        // No need for manual reflection!
 
         // Create test data
         testUser = new User();
@@ -69,7 +68,7 @@ public class CarManagementTest {
         // Arrange
         Parking mockReturnedParking = new Parking();
         mockReturnedParking.setVehicle(testVehicle);
-        when(mockVehicleDao.createParking(any(Parking.class))).thenReturn(mockReturnedParking);
+        when(vehicleDao.createParking(any(Parking.class))).thenReturn(mockReturnedParking);
 
         // Capture the Parking object passed to createParking
         ArgumentCaptor<Parking> parkingCaptor = ArgumentCaptor.forClass(Parking.class);
@@ -78,7 +77,7 @@ public class CarManagementTest {
         boolean result = carManagement.newParking(testUser, testVehicle);
 
         // Assert
-        verify(mockVehicleDao, times(1)).createParking(parkingCaptor.capture());
+        verify(vehicleDao, times(1)).createParking(parkingCaptor.capture());
 
         Parking capturedParking = parkingCaptor.getValue();
         assertNotNull(capturedParking, "Parking object should not be null");
@@ -102,7 +101,7 @@ public class CarManagementTest {
 
         // Assert
         assertFalse(result, "Method should return false when user is null");
-        verify(mockVehicleDao, never()).createParking(any(Parking.class));
+        verify(vehicleDao, never()).createParking(any(Parking.class));
     }
 
     @Test
@@ -112,7 +111,7 @@ public class CarManagementTest {
 
         // Assert
         assertFalse(result, "Method should return false when vehicle is null");
-        verify(mockVehicleDao, never()).createParking(any(Parking.class));
+        verify(vehicleDao, never()).createParking(any(Parking.class));
     }
 
     @Test
@@ -122,7 +121,7 @@ public class CarManagementTest {
 
         // Assert
         assertFalse(result, "Method should return false when both user and vehicle are null");
-        verify(mockVehicleDao, never()).createParking(any(Parking.class));
+        verify(vehicleDao, never()).createParking(any(Parking.class));
     }
 
     /**
@@ -133,14 +132,14 @@ public class CarManagementTest {
     @Test
     public void testNewParking_DaoFailure() {
         // Arrange
-        when(mockVehicleDao.createParking(any(Parking.class))).thenReturn(null);
+        when(vehicleDao.createParking(any(Parking.class))).thenReturn(null);
 
         // Act
         boolean result = carManagement.newParking(testUser, testVehicle);
 
         // Assert
         assertFalse(result, "Method should return false when DAO fails to persist");
-        verify(mockVehicleDao, times(1)).createParking(any(Parking.class));
+        verify(vehicleDao, times(1)).createParking(any(Parking.class));
     }
 
     /**
@@ -153,7 +152,7 @@ public class CarManagementTest {
         LocalDateTime beforeCall = LocalDateTime.now();
 
         Parking mockReturnedParking = new Parking();
-        when(mockVehicleDao.createParking(any(Parking.class))).thenReturn(mockReturnedParking);
+        when(vehicleDao.createParking(any(Parking.class))).thenReturn(mockReturnedParking);
 
         ArgumentCaptor<Parking> parkingCaptor = ArgumentCaptor.forClass(Parking.class);
 
@@ -163,7 +162,7 @@ public class CarManagementTest {
         LocalDateTime afterCall = LocalDateTime.now();
 
         // Assert
-        verify(mockVehicleDao, times(1)).createParking(parkingCaptor.capture());
+        verify(vehicleDao, times(1)).createParking(parkingCaptor.capture());
 
         Parking capturedParking = parkingCaptor.getValue();
         assertNotNull(capturedParking.getStartTime(), "Start time should not be null");
@@ -182,32 +181,32 @@ public class CarManagementTest {
 
     /**
      * UT-BUS-05: Validación de Vehículo Ya Estacionado
-     * NOTE: This test is commented out because the current implementation
-     * does NOT validate if a vehicle already has an active parking.
-     * This is documented as future functionality.
-     * 
-     * To enable this test, first implement the validation in
-     * CarManagement.newParking()
+     * Verifies that the system prevents creating a new parking
+     * if the vehicle already has an active parking session
      */
-    /*
-     * @Test
-     * public void testNewParking_VehicleAlreadyParked() {
-     * // Arrange
-     * // Mock that vehicle already has an active parking
-     * Vehicle vehicleWithParking = new Vehicle();
-     * vehicleWithParking.setPlate("ABC-123");
-     * 
-     * Parking activeParking = new Parking();
-     * activeParking.setVehicle(vehicleWithParking);
-     * vehicleWithParking.setActiveParking(activeParking);
-     * 
-     * // Act
-     * boolean result = carManagement.newParking(testUser, vehicleWithParking);
-     * 
-     * // Assert
-     * assertFalse(result,
-     * "Method should return false when vehicle already has active parking");
-     * verify(mockVehicleDao, never()).createParking(any(Parking.class));
-     * }
-     */
+    @Test
+    public void testNewParking_VehicleAlreadyParked() {
+        // Arrange
+        // Create a vehicle with an active parking
+        Vehicle vehicleWithParking = new Vehicle();
+        vehicleWithParking.setPlate("ABC-123");
+        vehicleWithParking.setBrand("Ford");
+        vehicleWithParking.setModel("Focus");
+
+        Parking activeParking = new Parking();
+        activeParking.setVehicle(vehicleWithParking);
+        activeParking.setStartTime(LocalDateTime.now());
+        activeParking.setMinutes(30);
+        activeParking.setAmount(5.0);
+
+        // Set the active parking on the vehicle
+        vehicleWithParking.setActiveParking(activeParking);
+
+        // Act
+        boolean result = carManagement.newParking(testUser, vehicleWithParking);
+
+        // Assert
+        assertFalse(result, "Method should return false when vehicle already has active parking");
+        verify(vehicleDao, never()).createParking(any(Parking.class));
+    }
 }

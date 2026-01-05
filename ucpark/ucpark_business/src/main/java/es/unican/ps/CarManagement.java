@@ -55,6 +55,11 @@ public class CarManagement implements ITaxManagement, ICarUserManagement, IPay {
             return false;
         }
 
+        // Validate that vehicle doesn't already have an active parking
+        if (vehicle.getActiveParking() != null) {
+            return false; // Vehicle already has an active parking
+        }
+
         Parking parking = new Parking();
         parking.setVehicle(vehicle);
         parking.setStartTime(java.time.LocalDateTime.now());
